@@ -1,0 +1,16 @@
+---
+description: Read project context before implementing features
+alwaysApply: true
+---
+
+# Project context
+
+Before non-trivial work, read:
+
+1. `context/README.md` — bootstrap order and status
+2. `context/workflow.md` — agent workflow
+3. Any `context/tasks/*.md` file the user references or that matches the current task
+
+Stack defaults: Next.js **16.2.6+**, App Router under `src/app/`, TypeScript, Tailwind. See `context/00-security-versions.md` for version policy.
+
+Task files override chat for that task's scope. Keep changes minimal and run verification commands from the relevant context doc.
