@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next App",
-  description: "Next.js 16 App Router starter",
+  title: "Aivest",
+  description: "AI-assisted investing — local development",
 };
 
 export default function RootLayout({

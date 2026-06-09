@@ -1,0 +1,42 @@
+# Local backend stack only. Run from repo root: npm run docker:up
+# Next.js runs separately: npm run dev (frontend/)
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aivest
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aivest"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api-python:
+    build: ./services/api-python
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/aivest
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-go:
+    build: ./services/api-go
+    ports:
+      - "8080:8080"
+
+  api-node:
+    build: ./services/api-node
+    ports:
+      - "3001:3001"
+
+volumes:
+  postgres_data:

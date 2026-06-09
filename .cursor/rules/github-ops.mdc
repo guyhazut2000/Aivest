@@ -1,0 +1,15 @@
+---
+description: GitHub issues, PRs, and task sync — use github-ops skill
+globs:
+alwaysApply: false
+---
+
+# GitHub operations
+
+When the user mentions issues, roadmap, milestones, Projects, PRs, or syncing `context/tasks/`:
+
+1. Read `context/07-agentic-github.md`
+2. Follow `.cursor/skills/github-ops/SKILL.md`
+3. Prefer **`gh`** for creates/updates; MCP or **`gh`** for reads
+
+**Never merge PRs.** Target branch: **`master`**.

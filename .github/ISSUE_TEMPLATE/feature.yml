@@ -1,0 +1,40 @@
+name: Feature
+description: New product capability
+title: "[Feature]: "
+labels:
+  - type:feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Prefer a detailed spec in `context/tasks/<name>.md` and link it below.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What should this achieve?
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Testable checklist
+    validations:
+      required: true
+  - type: input
+    id: task_file
+    attributes:
+      label: Task spec path (optional)
+      placeholder: context/tasks/my-feature.md
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - area:ui
+        - area:auth
+        - area:db
+        - other
+    validations:
+      required: true
