@@ -1,30 +1,39 @@
-# next-app
+# Aivest
 
-Next.js **16.2.6** (App Router) with TypeScript, Tailwind CSS v4, and Axios boilerplate.
+Monorepo for **Aivest** — AI-assisted investing. The GitHub repo is [guyhazut2000/Aivest](https://github.com/guyhazut2000/Aivest).
+
+## Layout
+
+| Path | Role |
+|------|------|
+| [`frontend/`](./frontend/) | Next.js 16 — deploy to **Vercel** (set **Root Directory** = `frontend`) |
+| [`backend/`](./backend/) | API services — **Docker** locally; **AWS** later |
+| [`context/`](./context/) | Agent & team specs |
+
+## Quick start
+
+```bash
+# From repo root
+cp .env.example frontend/.env.local
+
+npm install                 # root (husky + scripts)
+cd frontend && npm ci && cd ..
+
+npm run docker:up           # Postgres + Python / Go / Node APIs
+npm run dev                 # http://localhost:3000
+```
+
+## Scripts (repo root)
+
+| Script | Action |
+|--------|--------|
+| `npm run dev` | Next.js dev server |
+| `npm run validate` | lint + typecheck + build |
+| `npm run docker:up` | Start `backend/docker-compose.yml` |
+| `npm run docker:down` | Stop backend stack |
+
+See [context/10-local-docker.md](./context/10-local-docker.md) and [context/README.md](./context/README.md).
 
 ## Security
 
-This project pins **`next@16.2.6`**, the May 2026 security release. See [context/00-security-versions.md](./context/00-security-versions.md) before changing versions.
-
-There is no Next.js 17 yet; stay on latest patched **16.x** (or **15.5.18** only if you intentionally remain on 15).
-
-## AI / team instructions
-
-Bootstrap and library steps live in **[context/](./context/)** — read `context/README.md` first.
-
-## Scripts
-
-```bash
-npm run dev      # http://localhost:3000
-npm run build
-npm run lint
-```
-
-## API
-
-- Health check: `GET /api/health` → `{ "ok": true }`
-- HTTP client: `src/lib/api/` (`apiClient` for Client Components)
-
-## Environment
-
-Copy `.env.example` to `.env.local` and adjust values.
+Frontend pins **`next@16.2.6`**. See [context/00-security-versions.md](./context/00-security-versions.md).

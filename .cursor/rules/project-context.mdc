@@ -9,8 +9,16 @@ Before non-trivial work, read:
 
 1. `context/README.md` — bootstrap order and status
 2. `context/workflow.md` — agent workflow
-3. Any `context/tasks/*.md` file the user references or that matches the current task
+3. `context/tech-stack.md` — **canonical tech stack** (versions, shipped vs planned)
+4. `context/06-stack-responsibilities.md` — stack ownership, CI/CD, env
+5. Any `context/tasks/*.md` file the user references or that matches the current task
 
-Stack defaults: Next.js **16.2.6+**, App Router under `src/app/`, TypeScript, Tailwind. See `context/00-security-versions.md` for version policy.
+Stack details: `context/tech-stack.md`. Version floor: `context/00-security-versions.md` (Next.js **16.2.6+**, App Router).
+
+**GitHub:** `context/07-agentic-github.md` and skill `.cursor/skills/github-ops/`. May commit on feature branches; **never merge PRs**. Production branch: **`master`**.
+
+**Deploy:** `context/05-deploy.md`. Vercel plugin for previews; `npm run validate` before preview deploys.
+
+**Layout:** `frontend/` = Next.js; `backend/services/` = APIs. Never add backend services under `frontend/`. Local Docker: `context/10-local-docker.md`.
 
 Task files override chat for that task's scope. Keep changes minimal and run verification commands from the relevant context doc.
