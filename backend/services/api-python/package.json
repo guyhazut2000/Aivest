@@ -1,0 +1,8 @@
+{
+  "name": "aivest-api-python",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "uvicorn app.main:app --reload --host 127.0.0.1 --port 8000"
+  }
+}

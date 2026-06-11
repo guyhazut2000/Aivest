@@ -3,7 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "setup": "npm install && npm install --prefix frontend && npm install --prefix backend/services/api-node",
+    "setup:python": "pip install -r backend/services/api-python/requirements.txt",
     "dev": "npm run dev --prefix frontend",
+    "dev:api-python": "npm run start --prefix backend/services/api-python",
+    "dev:api-node": "npm run start --prefix backend/services/api-node",
+    "dev:backends": "concurrently -n python,node -c green,magenta \"npm run dev:api-python\" \"npm run dev:api-node\"",
+    "dev:all": "concurrently -n web,python,node -c blue,green,magenta \"npm run dev\" \"npm run dev:api-python\" \"npm run dev:api-node\"",
     "build": "npm run build --prefix frontend",
     "lint": "npm run lint --prefix frontend",
     "typecheck": "npm run typecheck --prefix frontend",
@@ -17,6 +23,7 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "husky": "^9.1.7"
   }
 }
