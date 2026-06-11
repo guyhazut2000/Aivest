@@ -32,7 +32,6 @@ async function fetchHealth(
 export async function getBackendHealth(): Promise<ServiceHealth[]> {
   const services = [
     { name: "Python API", url: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000" },
-    { name: "Go API", url: process.env.NEXT_PUBLIC_API_GO_URL ?? "http://localhost:8080" },
     { name: "Node API", url: process.env.NEXT_PUBLIC_API_NODE_URL ?? "http://localhost:3001" },
   ];
 

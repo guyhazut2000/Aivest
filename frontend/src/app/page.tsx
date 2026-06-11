@@ -15,9 +15,9 @@ export default async function Home() {
             Aivest
           </h1>
           <p className="max-w-xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-            AI-assisted investing platform. Frontend on Vercel; Python, Go, and Node APIs
-            run in Docker under <code className="text-sm">backend/services</code> until AWS
-            is connected.
+            AI-assisted investing platform. Frontend on Vercel; Python and Node APIs
+            under <code className="text-sm">backend/services</code> run natively in local dev
+            (Docker optional).
           </p>
         </header>
 
@@ -56,9 +56,13 @@ export default async function Home() {
           </ul>
           {onlineCount === 0 ? (
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              Start the stack from the repo root:{" "}
+              Start backends from the repo root:{" "}
               <code className="rounded bg-zinc-200 px-1.5 py-0.5 text-xs dark:bg-zinc-800">
-                npm run docker:up
+                npm run dev:backends
+              </code>{" "}
+              or{" "}
+              <code className="rounded bg-zinc-200 px-1.5 py-0.5 text-xs dark:bg-zinc-800">
+                npm run dev:all
               </code>
             </p>
           ) : null}

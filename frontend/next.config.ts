@@ -3,15 +3,16 @@ import { fileURLToPath } from "node:url";
 
 import type { NextConfig } from "next";
 
-const rootDir = path.dirname(fileURLToPath(import.meta.url));
+const frontendDir = path.dirname(fileURLToPath(import.meta.url));
+const monorepoRoot = path.join(frontendDir, "..");
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  // Monorepo: repo root also has package.json; keep Turbopack scoped to frontend/
+  // Monorepo: repo root also has package.json — both roots must match.
   turbopack: {
-    root: rootDir,
+    root: monorepoRoot,
   },
-  outputFileTracingRoot: path.join(rootDir, ".."),
+  outputFileTracingRoot: monorepoRoot,
 };
 
 export default nextConfig;
