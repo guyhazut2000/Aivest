@@ -8,6 +8,7 @@ const monorepoRoot = path.join(frontendDir, "..");
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  output: "standalone",
   // Monorepo: repo root also has package.json — both roots must match.
   turbopack: {
     root: monorepoRoot,

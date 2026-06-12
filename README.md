@@ -6,54 +6,42 @@ Monorepo for **Aivest** — AI-assisted investing. The GitHub repo is [guyhazut2
 
 | Path | Role |
 |------|------|
-| [`frontend/`](./frontend/) | Next.js 16 — deploy to **Vercel** (set **Root Directory** = `frontend`) |
-| [`backend/`](./backend/) | API services — run **natively** locally; Docker optional; **AWS** later |
+| [`frontend/`](./frontend/) | Next.js 16 — App Router |
+| [`backend/services/`](./backend/) | Python (FastAPI) + Node (Express) APIs |
+| `docker-compose.yml` | Local dev (hot reload) |
+| `docker-compose.prod.yml` | Production |
 
-## Quick start (no Docker)
+## Quick start
 
-**Prerequisites:** Node.js 18+, Python 3.12+ (for Python API).
-
-```bash
-# From repo root
-npm run setup
-npm run setup:python          # pip install FastAPI + uvicorn
-
-cp .env.example frontend/.env.local   # optional — defaults work locally
-
-npm run dev                   # frontend only → http://localhost:3000
-```
-
-To run **everything** (frontend + both APIs) in one terminal:
+**Prerequisites:** Docker Desktop (or Docker Engine + Compose v2).
 
 ```bash
-npm run dev:all
+npm run dev
 ```
 
-Or start backends in a second terminal:
+| URL | Service |
+|-----|---------|
+| http://localhost:3000 | Frontend (auto-reload) |
+| http://localhost:8000/health | Python API |
+| http://localhost:3001/health | Node API |
+
+## Scripts
+
+| Script | What it does |
+|--------|----------------|
+| `npm run dev` | Dev stack with hot reload |
+| `npm run test` | Lint + typecheck + build (no Docker) |
+| `npm run docker:test` | Same checks, inside Docker (CI-friendly) |
+| `npm run docker:prod` | Production stack |
+
+Env templates: [`.env.example`](./.env.example) (dev), [`.env.prod.example`](./.env.prod.example) (prod).
+
+## Native dev (optional)
 
 ```bash
-npm run dev:backends          # Python :8000, Node :3001
+npm run setup && npm run setup:python
+npm run dev:all:native
 ```
-
-## Scripts (repo root)
-
-| Script | Action |
-|--------|--------|
-| `npm run setup` | Install root + frontend + Node API dependencies |
-| `npm run setup:python` | `pip install` Python API requirements |
-| `npm run dev` | Next.js dev server (frontend only) |
-| `npm run dev:all` | Frontend + Python + Node APIs |
-| `npm run dev:backends` | Python + Node APIs only |
-| `npm run validate` | lint + typecheck + build |
-| `npm run docker:up` | *(optional)* Start Docker stack |
-
-## Health checks
-
-| Service | URL |
-|---------|-----|
-| Frontend | http://localhost:3000 |
-| Python API | http://localhost:8000/health |
-| Node API | http://localhost:3001/health |
 
 ## Security
 

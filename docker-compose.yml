@@ -1,0 +1,88 @@
+# Local development — hot reload for frontend + APIs.
+#   npm run dev          → start stack
+#   npm run docker:test  → lint + typecheck + build (one-off, uses profile "test")
+
+name: aivest
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-aivest}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aivest"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api-python:
+    build:
+      context: .
+      dockerfile: backend/services/api-python/Dockerfile
+      target: dev
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/aivest
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    volumes:
+      - ./backend/services/api-python/app:/app/app:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-node:
+    build:
+      context: .
+      dockerfile: backend/services/api-node/Dockerfile
+      target: dev
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    volumes:
+      - ./backend/services/api-node/src:/app/src:ro
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: dev
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      NEXT_PUBLIC_API_NODE_URL: ${NEXT_PUBLIC_API_NODE_URL:-http://localhost:3001}
+      WATCHPACK_POLLING: "true"
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./frontend:/workspace/frontend
+      - ./package.json:/workspace/package.json:ro
+      - ./package-lock.json:/workspace/package-lock.json:ro
+      - frontend_node_modules:/workspace/frontend/node_modules
+      - frontend_next:/workspace/frontend/.next
+    depends_on:
+      - api-python
+      - api-node
+
+  test:
+    profiles: [test]
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: test
+    depends_on:
+      - api-python
+      - api-node
+
+volumes:
+  postgres_data:
+  frontend_node_modules:
+  frontend_next:

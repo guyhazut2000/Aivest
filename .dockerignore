@@ -1,0 +1,36 @@
+# Dependencies
+**/node_modules
+**/.next
+**/out
+
+# Python
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.venv
+
+# Git & IDE
+.git
+.gitignore
+.cursor
+.husky
+*.md
+!README.md
+
+# Env & secrets
+.env*
+!.env.example
+!.env.prod.example
+
+# Build artifacts
+**/dist
+**/build
+**/coverage
+*.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
