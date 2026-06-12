@@ -17,9 +17,10 @@ This repository uses `**context/**` (next to `src/`) for human- and AI-readable 
 Aivest/                ← git root (repo: guyhazut2000/Aivest)
 ├── AGENTS.md          ← you are here
 ├── frontend/          ← Next.js App Router (Vercel)
-├── backend/services/  ← APIs (local Docker; AWS later)
-├── context/           ← specs, workflow, tasks
-└── package.json       ← npm run dev | validate | docker:up
+├── backend/services/  ← APIs (Docker; AWS later)
+├── docker-compose.yml      ← dev
+├── docker-compose.prod.yml ← prod
+└── package.json       ← npm run dev | test | docker:prod
 ```
 
 ## Rules of thumb

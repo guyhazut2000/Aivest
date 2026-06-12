@@ -1,46 +1,17 @@
 # Aivest — backend
 
-API services for local development. **Production (later):** deploy these images to AWS.
+**api-python** (FastAPI, :8000) and **api-node** (Express, :3001).
 
-## Layout
-
-```text
-backend/
-├── docker-compose.yml   # optional — use if you have Docker
-└── services/
-    ├── api-python/   FastAPI — port 8000
-    └── api-node/     Express — port 3001
-```
-
-## Native dev (recommended)
-
-From the **repo root**:
+Run from the **repo root** via Docker (`npm run dev`) or natively:
 
 ```bash
-npm run setup:python          # once — installs FastAPI + uvicorn
-npm run dev:backends          # both APIs
-# or individually:
-npm run dev:api-python
-npm run dev:api-node
+npm run setup:python
+npm run dev:backends
 ```
 
-**Requirements:** Python 3.12+, Node.js 18+.
+Each service has a `Dockerfile` with `dev` and `runner` targets. Postgres is on **5432**; APIs do not use it yet.
 
-## Docker (optional)
-
-If you prefer containers:
-
-```bash
-npm run docker:up
-npm run docker:down
-npm run docker:logs
-```
-
-Postgres (Compose service) listens on **5432** with database `aivest`. The current APIs do not require Postgres yet.
-
-## Health checks
-
-| Service     | URL                          |
-|-------------|------------------------------|
-| api-python  | http://localhost:8000/health |
-| api-node    | http://localhost:3001/health |
+| Service | Health |
+|---------|--------|
+| api-python | http://localhost:8000/health |
+| api-node | http://localhost:3001/health |

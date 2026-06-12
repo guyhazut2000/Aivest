@@ -1,0 +1,68 @@
+# Production — npm run docker:prod
+# Optional: cp .env.prod.example .env.prod
+
+name: aivest
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    env_file:
+      - path: .env.prod
+        required: false
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-aivest}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d aivest"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api-python:
+    build:
+      context: .
+      dockerfile: backend/services/api-python/Dockerfile
+      target: runner
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/aivest
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-node:
+    build:
+      context: .
+      dockerfile: backend/services/api-node/Dockerfile
+      target: runner
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: runner
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+      NEXT_PUBLIC_API_NODE_URL: ${NEXT_PUBLIC_API_NODE_URL:-http://localhost:3001}
+    depends_on:
+      - api-python
+      - api-node
+
+volumes:
+  postgres_data:
