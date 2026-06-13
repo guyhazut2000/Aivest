@@ -14,7 +14,7 @@ Optimized for AI agents and experienced contributors who need constraints, not t
 |------|----------|
 | Tech stack | `tech-stack.md`, `00-security-versions.md` |
 | Workflow | `workflow.md`, GitHub/PR rules |
-| Domain decisions | `auth.md` (Clerk, token flow) |
+| Domain decisions | `auth.md` (Entra ID, token flow) |
 | Stack ownership | `06-stack-responsibilities.md` (frontend vs backend vs infra) |
 | Deploy / env | `05-deploy.md`, `10-local-docker.md` |
 | Cross-cutting conventions | Naming, folder layout, verification commands |
@@ -39,12 +39,14 @@ Read in this order when starting work:
 | # | File | When |
 |---|------|------|
 | 1 | This README | Folder map and boundaries |
-| 2 | `workflow.md` | How to work, verify, PR rules |
-| 3 | `tech-stack.md` | Versions, shipped vs planned |
-| 4 | `06-stack-responsibilities.md` | Who owns what, CI/CD, env |
-| 5 | `07-agentic-github.md` | Issues, PRs (**never merge PRs**) |
-| 6 | Matching file in `specs/` | If the user or issue points at a spec |
-| 7 | Topic docs below | When the task touches that domain |
+| 2 | [current.md](./current.md) | Quick pointer — active step + spec |
+| 3 | [specs/progress.md](../specs/progress.md) | Full progress tracker (agents) |
+| 4 | [workflow.md](./workflow.md) | How to work, verify, PR rules |
+| 5 | `tech-stack.md` | Versions, shipped vs planned |
+| 6 | `06-stack-responsibilities.md` | Who owns what, CI/CD, env |
+| 7 | `07-agentic-github.md` | Issues, PRs (**never merge PRs**) |
+| 8 | Active `specs/0-N-*.md` | Scoped work for current step |
+| 9 | Topic docs below | When the task touches that domain |
 
 ### Topic docs
 
@@ -72,9 +74,10 @@ docs/       →  Human-readable explanations
 
 | File | Status |
 |------|--------|
-| [auth.md](./auth.md) | Written — Clerk planned, not shipped |
-| `tech-stack.md` | Planned |
-| `workflow.md` | Planned |
+| [current.md](./current.md) | Written — points to step **0-2** |
+| [workflow.md](./workflow.md) | Written |
+| [auth.md](./auth.md) | Written — Entra ID shipped (step 0-2 in progress) |
+| [roadmap.md](./roadmap.md) | Redirect → `specs/progress.md` |
 | `00-security-versions.md` | Planned |
 | `05-deploy.md` | Planned |
 | `06-stack-responsibilities.md` | Planned |

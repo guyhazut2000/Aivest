@@ -1,3 +1,4 @@
+import { AuthHeader } from "@/components/auth-header";
 import { getBackendHealth } from "@/lib/services/health";
 
 export default async function Home() {
@@ -8,9 +9,12 @@ export default async function Home() {
     <div className="flex min-h-full flex-col bg-zinc-50 font-sans dark:bg-zinc-950">
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-16 sm:px-10">
         <header className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-wider text-zinc-500">
-            Local development
-          </p>
+          <div className="flex items-start justify-between gap-4">
+            <p className="text-sm font-medium uppercase tracking-wider text-zinc-500">
+              Local development
+            </p>
+            <AuthHeader />
+          </div>
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
             Aivest
           </h1>
@@ -72,7 +76,7 @@ export default async function Home() {
           <p className="font-medium text-zinc-800 dark:text-zinc-200">Next steps</p>
           <ul className="mt-2 list-inside list-disc space-y-1">
             <li>Prisma + Neon for data</li>
-            <li>Clerk auth (Google OAuth)</li>
+            <li>Microsoft Entra ID auth (in progress)</li>
             <li>AI features in Python API services</li>
           </ul>
         </section>

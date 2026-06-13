@@ -2,7 +2,7 @@
 name: github-ops
 description: >-
   Manage GitHub issues, Projects, milestones, branches, and PRs for this repo.
-  Sync with context/tasks/*.md. Use when creating issues, roadmap work, opening
+  Sync with specs/progress.md and numbered specs (`0-N-slug.md`). Use when creating issues, roadmap work, opening
   PRs, or summarizing GitHub state. Never merge PRs.
 ---
 
@@ -18,7 +18,7 @@ description: >-
 
 - **Production branch:** `master`
 - **Human merges** PRs (CodeRabbit review). Agents **never merge**.
-- **Local spec:** `context/tasks/<name>.md` — keep in sync with GitHub Issue `#`
+- **Local spec:** `specs/<name>.md` — keep in sync with GitHub Issue `#` and roadmap step (e.g. `0-2`)
 - Full conventions: [context/07-agentic-github.md](../../context/07-agentic-github.md)
 
 ## Tool choice
@@ -33,21 +33,24 @@ Verify: `gh auth status` and `gh repo view`.
 
 ## Workflow A — Task → Issue
 
-1. Read `context/tasks/<task>.md` (Goal, Requirements, Acceptance criteria).
+1. Read `specs/progress.md` for current step, then `specs/0-N-slug.md`.
 2. Create issue:
 
 ```bash
 gh issue create \
-  --title "<title from task>" \
+  --title "[0-2] <title from task>" \
   --body "$(cat <<'EOF'
+## Roadmap
+Step **0-2** — <title>
+
 ## Goal
 <from task>
 
 ## Acceptance criteria
 - [ ] ...
 
-## Task spec
-`context/tasks/<file>.md`
+## Spec
+`specs/0-2-entra-auth.md`
 
 EOF
 )" \
@@ -56,13 +59,9 @@ EOF
 ```
 
 3. Add to Project/milestone if user specified.
-4. Update task file frontmatter:
-
-```markdown
-**GitHub:** #N
-**Branch:** (pending)
-**PR:** (pending)
-```
+4. Update spec and progress:
+   - In `specs/0-N-slug.md`: set status `in-progress`
+   - In `specs/progress.md`: set step + **Current** to `in-progress`
 
 ## Workflow B — Branch + commits
 
@@ -70,7 +69,7 @@ EOF
 git fetch origin
 git checkout master
 git pull origin master
-git checkout -b feat/N-short-slug
+git checkout -b feat/0-2-short-slug
 ```
 
 - Commit on feature branch when implementation is ready (user allows agent commits here).
@@ -81,8 +80,11 @@ git checkout -b feat/N-short-slug
 ```bash
 gh pr create \
   --base master \
-  --title "[#N] Short title" \
+  --title "[0-2] Short title" \
   --body "$(cat <<'EOF'
+## Roadmap
+Step **0-2** — Short title
+
 ## Summary
 ...
 
@@ -91,18 +93,18 @@ gh pr create \
 
 Fixes #N
 
-## Task spec
-context/tasks/<file>.md
+## Spec
+specs/<file>.md
 EOF
 )"
 ```
 
-Update task file with PR URL. Do **not** run `gh pr merge`.
+Update spec with PR URL; update `specs/progress.md`. Do **not** run `gh pr merge`.
 
 ## Workflow D — Sync status
 
 - Progress comment: `gh issue comment N --body "..."`
-- Update task checklists in the repo
+- Update spec checklists and `specs/progress.md`
 - Move Project card if user uses Projects (via `gh project` or web — document what you did)
 
 ## Workflow E — Roadmap summary
