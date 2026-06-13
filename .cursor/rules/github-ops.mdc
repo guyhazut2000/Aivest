@@ -6,7 +6,7 @@ alwaysApply: false
 
 # GitHub operations
 
-When the user mentions issues, roadmap, milestones, Projects, PRs, or syncing `context/tasks/`:
+When the user mentions issues, roadmap, milestones, Projects, PRs, or syncing `specs/progress.md`:
 
 1. Read `context/07-agentic-github.md`
 2. Follow `.cursor/skills/github-ops/SKILL.md`

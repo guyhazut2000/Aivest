@@ -26,7 +26,7 @@ Three folders at the repo root serve different audiences and lifetimes. **Do not
 
 **Do not use for:** permanent stack choices (those live in `context/`), agent rules, long prose guides.
 
-→ Index: [specs/README.md](./specs/README.md)
+→ Index: [specs/progress.md](./specs/progress.md)
 
 **Precedence:** When implementing a spec, the spec wins over chat for **scope and acceptance criteria**. `context/` still wins for **stack, layout, and conventions**.
 
@@ -42,6 +42,7 @@ Three folders at the repo root serve different audiences and lifetimes. **Do not
 
 | I need to… | Go to |
 |------------|--------|
+| Know current dev step | `specs/progress.md` or `context/current.md` |
 | Know Next.js version or auth provider | `context/` |
 | Implement a GitHub issue with a linked spec | `specs/` + relevant `context/` |
 | Explain the monorepo to a new teammate | `docs/` (or root `README.md` for quick start) |
@@ -50,12 +51,14 @@ Three folders at the repo root serve different audiences and lifetimes. **Do not
 ## Start here (bootstrap order)
 
 1. [context/README.md](./context/README.md) — folder map and read order
-2. [context/workflow.md](./context/workflow.md) — how to work in this repo *(planned)*
-3. **[context/tech-stack.md](./context/tech-stack.md)** — technologies, versions, shipped vs planned *(planned)*
-4. [context/06-stack-responsibilities.md](./context/06-stack-responsibilities.md) — stack ownership, CI/CD, env *(planned)*
-5. [context/07-agentic-github.md](./context/07-agentic-github.md) — issues, PRs, task sync (**never merge PRs**) *(planned)*
-6. Any matching file in [`specs/`](./specs/) — when the user or issue references a spec
-7. Topic context — e.g. [context/auth.md](./context/auth.md) for authentication work
+2. **[specs/progress.md](./specs/progress.md)** — project progress tracker; **current step**
+3. [context/current.md](./context/current.md) — quick pointer to active spec
+4. [context/workflow.md](./context/workflow.md) — how to work, verify, PR rules
+5. **[context/tech-stack.md](./context/tech-stack.md)** — technologies, versions, shipped vs planned *(planned)*
+6. [context/06-stack-responsibilities.md](./context/06-stack-responsibilities.md) — stack ownership, CI/CD, env *(planned)*
+7. [context/07-agentic-github.md](./context/07-agentic-github.md) — issues, PRs, task sync (**never merge PRs**) *(planned)*
+8. Active spec in [`specs/`](./specs/) — e.g. `0-2-entra-auth.md`
+9. Topic context — e.g. [context/auth.md](./context/auth.md) for authentication work
 
 ## Repository layout
 

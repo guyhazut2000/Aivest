@@ -24,7 +24,7 @@ Explain **what the system is** and **how to work with it** in narrative form. Op
 | "Use Next.js 16.2.6" version pins | `context/tech-stack.md` |
 | Agent workflow ("never merge PRs") | `AGENTS.md`, `context/workflow.md` |
 | Feature acceptance criteria for a sprint | `specs/` |
-| Clerk env vars and auth architecture for implementers | `context/auth.md` |
+| Entra ID env vars and auth architecture for implementers | `context/auth.md` |
 | Auto-generated API docs | Generate in CI or from code; link from here if needed |
 | Duplicate of root `README.md` quick start | Keep quick start in root `README.md`; link out for depth |
 

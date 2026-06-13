@@ -13,7 +13,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  // Attach Authorization when auth is added, e.g. from a session helper.
+  // Server-side: use getEntraAccessToken() from @/lib/auth/session and set Authorization.
   return config;
 });
 
