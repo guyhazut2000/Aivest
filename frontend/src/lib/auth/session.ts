@@ -1,7 +1,7 @@
-import { auth } from "@/auth";
+import { auth } from "@clerk/nextjs/server";
 
-/** Entra ID access token for server-side API calls (attach as Bearer). */
-export async function getEntraAccessToken(): Promise<string | null> {
-  const session = await auth();
-  return session?.accessToken ?? null;
+/** Clerk session token for server-side API calls (attach as Bearer). */
+export async function getClerkAccessToken(): Promise<string | null> {
+  const { getToken } = await auth();
+  return getToken();
 }

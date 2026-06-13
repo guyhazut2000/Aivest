@@ -13,7 +13,7 @@ export const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-  // Server-side: use getEntraAccessToken() from @/lib/auth/session and set Authorization.
+  // Server-side: use getClerkAccessToken() from @/lib/auth/session and set Authorization.
   return config;
 });
 

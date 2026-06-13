@@ -1,10 +1,10 @@
 import Link from "next/link";
-
-import { auth } from "@/auth";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function DashboardPage() {
-  const session = await auth();
-  const user = session?.user;
+  const user = await currentUser();
+  const displayName =
+    user?.fullName ?? user?.username ?? user?.primaryEmailAddress?.emailAddress ?? "User";
 
   return (
     <div className="flex min-h-full flex-col bg-zinc-50 px-6 py-16 font-sans dark:bg-zinc-950">
@@ -21,12 +21,14 @@ export default async function DashboardPage() {
           </Link>
         </div>
         <div className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-          <p className="text-sm text-zinc-500">Signed in via Microsoft Entra ID</p>
+          <p className="text-sm text-zinc-500">Signed in via Clerk</p>
           <p className="mt-2 text-lg font-medium text-zinc-900 dark:text-zinc-100">
-            {user?.name ?? "User"}
+            {displayName}
           </p>
-          {user?.email ? (
-            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{user.email}</p>
+          {user?.primaryEmailAddress?.emailAddress ? (
+            <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {user.primaryEmailAddress.emailAddress}
+            </p>
           ) : null}
         </div>
       </main>

@@ -14,7 +14,7 @@ Optimized for AI agents and experienced contributors who need constraints, not t
 |------|----------|
 | Tech stack | `tech-stack.md`, `00-security-versions.md` |
 | Workflow | `workflow.md`, GitHub/PR rules |
-| Domain decisions | `auth.md` (Entra ID, token flow) |
+| Domain decisions | `auth.md` (Clerk, token flow) |
 | Stack ownership | `06-stack-responsibilities.md` (frontend vs backend vs infra) |
 | Deploy / env | `05-deploy.md`, `10-local-docker.md` |
 | Cross-cutting conventions | Naming, folder layout, verification commands |
@@ -76,7 +76,7 @@ docs/       →  Human-readable explanations
 |------|--------|
 | [current.md](./current.md) | Written — points to step **0-2** |
 | [workflow.md](./workflow.md) | Written |
-| [auth.md](./auth.md) | Written — Entra ID shipped (step 0-2 in progress) |
+| [auth.md](./auth.md) | Written — Clerk auth (step 0-2 in progress) |
 | [roadmap.md](./roadmap.md) | Redirect → `specs/progress.md` |
 | `00-security-versions.md` | Planned |
 | `05-deploy.md` | Planned |

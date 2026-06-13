@@ -76,7 +76,7 @@ export default async function Home() {
           <p className="font-medium text-zinc-800 dark:text-zinc-200">Next steps</p>
           <ul className="mt-2 list-inside list-disc space-y-1">
             <li>Prisma + Neon for data</li>
-            <li>Microsoft Entra ID auth (in progress)</li>
+            <li>Clerk auth (in progress)</li>
             <li>AI features in Python API services</li>
           </ul>
         </section>
