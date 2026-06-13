@@ -5,15 +5,26 @@ alwaysApply: true
 
 # Project context
 
-Before non-trivial work, read:
+## Folder responsibilities (do not mix)
 
-1. `context/README.md` — bootstrap order and status
-2. `context/workflow.md` — agent workflow
-3. `context/tech-stack.md` — **canonical tech stack** (versions, shipped vs planned)
-4. `context/06-stack-responsibilities.md` — stack ownership, CI/CD, env
-5. Any `context/tasks/*.md` file the user references or that matches the current task
+| Folder | Use for | Do not use for |
+|--------|---------|----------------|
+| `context/` | Evergreen stack, decisions, workflow, domain rules (auth, deploy) | Feature specs, tutorials |
+| `specs/` | Scoped work: acceptance criteria, what to build now | Permanent stack rules, agent workflow |
+| `docs/` | Human onboarding, architecture narrative, ADRs, runbooks | Version pins, task checklists |
 
-Stack details: `context/tech-stack.md`. Version floor: `context/00-security-versions.md` (Next.js **16.2.6+**, App Router).
+Entry point: `AGENTS.md`. Spec overrides chat for **scope**; `context/` overrides for **stack and conventions**.
+
+## Before non-trivial work, read
+
+1. `context/README.md` — bootstrap order and folder map
+2. `context/workflow.md` — agent workflow *(when present)*
+3. `context/tech-stack.md` — **canonical tech stack** *(when present)*
+4. `context/06-stack-responsibilities.md` — stack ownership, CI/CD, env *(when present)*
+5. Any matching `specs/*.md` file the user or issue references
+6. `context/auth.md` — when implementing authentication, sessions, or protected routes
+
+Stack details: `context/tech-stack.md`. Version floor: `context/00-security-versions.md` (Next.js **16.2.6+**, App Router) *(when present)*.
 
 **GitHub:** `context/07-agentic-github.md` and skill `.cursor/skills/github-ops/`. May commit on feature branches; **never merge PRs**. Production branch: **`master`**.
 
@@ -21,4 +32,4 @@ Stack details: `context/tech-stack.md`. Version floor: `context/00-security-vers
 
 **Layout:** `frontend/` = Next.js; `backend/services/` = APIs. Never add backend services under `frontend/`. Local Docker: `context/10-local-docker.md`.
 
-Task files override chat for that task's scope. Keep changes minimal and run verification commands from the relevant context doc.
+Keep changes minimal and run verification commands from the relevant context or spec doc.
