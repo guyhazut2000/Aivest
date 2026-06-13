@@ -46,3 +46,12 @@ npm run dev:all:native
 ## Security
 
 Frontend pins **`next@16.2.6`**.
+
+## Documentation
+
+| Folder | Purpose |
+|--------|---------|
+| [`docs/`](./docs/) | Human-facing guides and architecture |
+| [`specs/`](./specs/) | Feature and task specifications |
+| [`context/`](./context/) | Agent-oriented project decisions and stack |
+| [`AGENTS.md`](./AGENTS.md) | AI agent entry point |
