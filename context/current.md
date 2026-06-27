@@ -2,8 +2,8 @@
 
 | | |
 |---|---|
-| **Step** | `0-4` (done) — next: `0-5` AI features |
+| **Step** | `0-5` (done) |
 | **Tracker** | [specs/progress.md](../specs/progress.md) |
-| **Active spec** | [specs/0-4-portfolio.md](../specs/0-4-portfolio.md) |
+| **Active spec** | [specs/0-5-ai-portfolio-analysis.md](../specs/0-5-ai-portfolio-analysis.md) |
 
 Update this file when **Current** changes in `specs/progress.md`.

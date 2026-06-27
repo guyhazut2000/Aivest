@@ -1,5 +1,6 @@
 import { AddHoldingForm } from "@/components/add-holding-form";
 import { PortfolioHoldings } from "@/components/portfolio-holdings";
+import { PortfolioInsights } from "@/components/portfolio-insights";
 import { SiteNav } from "@/components/site-nav";
 import { getTopCryptoMarkets } from "@/lib/services/crypto";
 import { getPortfolioSnapshot } from "@/lib/services/portfolio";
@@ -61,6 +62,8 @@ export default async function PortfolioPage() {
           </h2>
           <PortfolioHoldings holdings={snapshot.holdings} />
         </section>
+
+        <PortfolioInsights />
       </main>
     </div>
   );

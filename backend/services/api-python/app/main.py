@@ -3,6 +3,8 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routers import ai
+
 app = FastAPI(title="Aivest API (Python)", version="0.1.0")
 
 _cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000")
@@ -15,6 +17,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+app.include_router(ai.router)
 
 
 @app.get("/health")
