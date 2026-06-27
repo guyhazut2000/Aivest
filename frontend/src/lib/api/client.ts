@@ -12,11 +12,6 @@ export const apiClient = axios.create({
   },
 });
 
-apiClient.interceptors.request.use((config) => {
-  // Server-side: use getClerkAccessToken() from @/lib/auth/session and set Authorization.
-  return config;
-});
-
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError<{ message?: string }>) => {

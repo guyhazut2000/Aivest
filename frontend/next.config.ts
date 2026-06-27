@@ -14,6 +14,16 @@ const nextConfig: NextConfig = {
     root: monorepoRoot,
   },
   outputFileTracingRoot: monorepoRoot,
+  // Webpack dev in Docker: polling is required on Windows bind mounts.
+  webpack: (config, { dev }) => {
+    if (dev && process.env.WATCHPACK_POLLING === "true") {
+      config.watchOptions = {
+        poll: Number(process.env.WATCHPACK_POLLING_INTERVAL ?? 1000),
+        aggregateTimeout: 300,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

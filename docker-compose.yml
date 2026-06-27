@@ -60,21 +60,37 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       NEXT_PUBLIC_API_NODE_URL: ${NEXT_PUBLIC_API_NODE_URL:-http://localhost:3001}
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:-}
-      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY:-}
-      NEXT_PUBLIC_CLERK_SIGN_IN_URL: ${NEXT_PUBLIC_CLERK_SIGN_IN_URL:-/sign-in}
-      NEXT_PUBLIC_CLERK_SIGN_UP_URL: ${NEXT_PUBLIC_CLERK_SIGN_UP_URL:-/sign-up}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/aivest}
       WATCHPACK_POLLING: "true"
+      WATCHPACK_POLLING_INTERVAL: "1000"
       CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "1000"
     volumes:
+      # Bind-mount source; keep container node_modules isolated from the host.
       - ./frontend:/workspace/frontend
       - ./package.json:/workspace/package.json:ro
       - ./package-lock.json:/workspace/package-lock.json:ro
       - frontend_node_modules:/workspace/frontend/node_modules
-      - frontend_next:/workspace/frontend/.next
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /workspace/frontend
+          ignore:
+            - node_modules/
+            - .next/
+        - action: sync
+          path: ./package.json
+          target: /workspace/package.json
+        - action: rebuild
+          path: ./frontend/package.json
     depends_on:
-      - api-python
-      - api-node
+      postgres:
+        condition: service_healthy
+      api-python:
+        condition: service_started
+      api-node:
+        condition: service_started
 
   test:
     profiles: [test]
@@ -89,4 +105,3 @@ services:
 volumes:
   postgres_data:
   frontend_node_modules:
-  frontend_next:

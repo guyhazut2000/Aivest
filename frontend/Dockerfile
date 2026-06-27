@@ -18,12 +18,15 @@ COPY package.json package-lock.json ./
 COPY --from=deps /workspace/frontend/node_modules ./frontend/node_modules
 WORKDIR /workspace/frontend
 COPY frontend/ ./
+RUN npx prisma generate
 ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV WATCHPACK_POLLING=true
+ENV WATCHPACK_POLLING_INTERVAL=1000
 ENV CHOKIDAR_USEPOLLING=true
+ENV CHOKIDAR_INTERVAL=1000
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev:docker"]
 
 # ── Test (lint + typecheck + build) ───────────────────────────────────────────
 FROM base AS test
@@ -31,6 +34,7 @@ COPY package.json package-lock.json ./
 COPY --from=deps /workspace/frontend/node_modules ./frontend/node_modules
 WORKDIR /workspace/frontend
 COPY frontend/ ./
+RUN npx prisma generate
 ENV NODE_ENV=test
 ENV NEXT_TELEMETRY_DISABLED=1
 CMD ["npm", "run", "validate"]
@@ -42,6 +46,7 @@ COPY --from=deps /workspace/frontend/node_modules ./frontend/node_modules
 WORKDIR /workspace/frontend
 COPY frontend/ ./
 ENV NEXT_TELEMETRY_DISABLED=1
+RUN npx prisma generate
 RUN npm run build
 
 # ── Production runtime ────────────────────────────────────────────────────────

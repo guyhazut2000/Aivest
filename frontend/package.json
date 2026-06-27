@@ -4,17 +4,22 @@
   "private": true,
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
+    "dev:docker": "next dev --hostname 0.0.0.0 --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "validate": "npm run lint && npm run typecheck && npm run build"
+    "validate": "npm run db:generate && npm run lint && npm run typecheck && npm run build",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs}": "eslint --fix --max-warnings=0"
   },
   "dependencies": {
-    "@clerk/nextjs": "^7.5.2",
+    "@prisma/client": "^6.19.0",
     "axios": "^1.16.1",
     "next": "16.2.6",
     "react": "19.2.4",
@@ -28,6 +33,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "prisma": "^6.19.0",
     "lint-staged": "^16.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"

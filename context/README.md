@@ -74,9 +74,9 @@ docs/       →  Human-readable explanations
 
 | File | Status |
 |------|--------|
-| [current.md](./current.md) | Written — points to step **0-2** |
+| [current.md](./current.md) | Written — points to step **0-3** |
 | [workflow.md](./workflow.md) | Written |
-| [auth.md](./auth.md) | Written — Clerk auth (step 0-2 in progress) |
+| [auth.md](./auth.md) | Skipped — no auth in this learning project |
 | [roadmap.md](./roadmap.md) | Redirect → `specs/progress.md` |
 | `00-security-versions.md` | Planned |
 | `05-deploy.md` | Planned |

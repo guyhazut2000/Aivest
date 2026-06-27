@@ -6,8 +6,8 @@
 
 | | |
 |---|---|
-| **Step** | `0-2` |
-| **Spec** | [0-2-clerk-auth.md](./0-2-clerk-auth.md) |
+| **Step** | `0-3` |
+| **Spec** | [0-3-prisma-postgres.md](./0-3-prisma-postgres.md) |
 | **Status** | `in-progress` |
 
 ## Steps
@@ -16,11 +16,11 @@
 |------|-------|--------|------|
 | 0-0 | Project setup | `done` | [0-0-project-setup.md](./0-0-project-setup.md) |
 | 0-1 | Homepage | `done` | [0-1-homepage.md](./0-1-homepage.md) |
-| 0-2 | Authentication (Clerk) | `in-progress` | [0-2-clerk-auth.md](./0-2-clerk-auth.md) |
-| 0-3 | Data layer (Prisma + Neon) | — | *(not written)* |
+| 0-2 | Authentication (Clerk) | `skipped` | [0-2-clerk-auth.md](./0-2-clerk-auth.md) |
+| 0-3 | Data layer (Prisma + Postgres) | `in-progress` | [0-3-prisma-postgres.md](./0-3-prisma-postgres.md) |
 | 0-4 | AI features (Python API) | — | *(not written)* |
 
-**Status values:** `done` · `in-progress` · `draft` · `—` (no spec yet)
+**Status values:** `done` · `in-progress` · `draft` · `skipped` · `—` (no spec yet)
 
 ## Naming
 
