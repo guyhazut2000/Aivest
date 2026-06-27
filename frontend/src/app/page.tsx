@@ -1,4 +1,5 @@
 import { CryptoMarketTable } from "@/components/crypto-market-table";
+import { SiteNav } from "@/components/site-nav";
 import { getTopCryptoMarkets } from "@/lib/services/crypto";
 
 export default async function Home() {
@@ -7,17 +8,22 @@ export default async function Home() {
   return (
     <div className="flex min-h-full flex-col bg-zinc-50 font-sans dark:bg-zinc-950">
       <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-6 py-16 sm:px-10">
-        <header className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-wider text-zinc-500">
-            Live markets
-          </p>
+        <header className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <p className="text-sm font-medium uppercase tracking-wider text-zinc-500">
+              Live markets
+            </p>
+            <SiteNav active="/" />
+          </div>
+          <div className="space-y-3">
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
             Crypto prices
           </h1>
           <p className="max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Track the top cryptocurrencies by market cap. Portfolio management is
-            coming next.
+            Track the top cryptocurrencies by market cap. Manage your holdings on
+            the portfolio page.
           </p>
+          </div>
         </header>
 
         {markets.ok ? (

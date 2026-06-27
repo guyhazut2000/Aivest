@@ -58,6 +58,33 @@ export async function getTopCryptoMarkets(
   url.searchParams.set("sparkline", "false");
   url.searchParams.set("price_change_percentage", "24h");
 
+  return fetchMarkets(url, options);
+}
+
+export async function getCryptoMarketsByIds(
+  ids: string[],
+  options?: { fresh?: boolean },
+): Promise<CryptoMarketsResult> {
+  const uniqueIds = [...new Set(ids.filter(Boolean))];
+
+  if (uniqueIds.length === 0) {
+    return { ok: true, coins: [], fetchedAt: new Date() };
+  }
+
+  const url = new URL(COINGECKO_MARKETS_URL);
+  url.searchParams.set("vs_currency", "usd");
+  url.searchParams.set("ids", uniqueIds.join(","));
+  url.searchParams.set("order", "market_cap_desc");
+  url.searchParams.set("sparkline", "false");
+  url.searchParams.set("price_change_percentage", "24h");
+
+  return fetchMarkets(url, options);
+}
+
+async function fetchMarkets(
+  url: URL,
+  options?: { fresh?: boolean },
+): Promise<CryptoMarketsResult> {
   try {
     const res = await fetch(url, {
       ...(options?.fresh

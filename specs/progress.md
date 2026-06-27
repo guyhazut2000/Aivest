@@ -6,9 +6,9 @@
 
 | | |
 |---|---|
-| **Step** | `0-3` |
-| **Spec** | [0-3-prisma-postgres.md](./0-3-prisma-postgres.md) |
-| **Status** | `in-progress` |
+| **Step** | `0-4` |
+| **Spec** | [0-4-portfolio.md](./0-4-portfolio.md) |
+| **Status** | `done` |
 
 ## Steps
 
@@ -17,8 +17,9 @@
 | 0-0 | Project setup | `done` | [0-0-project-setup.md](./0-0-project-setup.md) |
 | 0-1 | Homepage | `done` | [0-1-homepage.md](./0-1-homepage.md) |
 | 0-2 | Authentication (Clerk) | `skipped` | [0-2-clerk-auth.md](./0-2-clerk-auth.md) |
-| 0-3 | Data layer (Prisma + Postgres) | `in-progress` | [0-3-prisma-postgres.md](./0-3-prisma-postgres.md) |
-| 0-4 | AI features (Python API) | — | *(not written)* |
+| 0-3 | Data layer (Prisma + Postgres) | `done` | [0-3-prisma-postgres.md](./0-3-prisma-postgres.md) |
+| 0-4 | Portfolio management | `done` | [0-4-portfolio.md](./0-4-portfolio.md) |
+| 0-5 | AI features (Python API) | — | *(not written)* |
 
 **Status values:** `done` · `in-progress` · `draft` · `skipped` · `—` (no spec yet)
 

@@ -4,6 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 
 import { AnimatedPriceCell } from "@/components/animated-price-cell";
 import type { CryptoMarket } from "@/lib/services/crypto";
+import {
+  formatCompactUsd,
+  formatPercent,
+  formatUsd,
+  percentClass,
+} from "@/lib/utils/currency";
 
 type CryptoMarketTableProps = {
   coins: CryptoMarket[];
@@ -15,62 +21,6 @@ type MarketsResponse =
   | { ok: false; error: string };
 
 const POLL_INTERVAL_MS = 30_000;
-
-const usdFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 2,
-});
-
-const compactUsdFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  notation: "compact",
-  maximumFractionDigits: 2,
-});
-
-function formatPrice(price: number): string {
-  if (price >= 1) {
-    return usdFormatter.format(price);
-  }
-
-  if (price >= 0.01) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 4,
-    }).format(price);
-  }
-
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 8,
-  }).format(price);
-}
-
-function formatPercent(value: number | null): string {
-  if (value === null || Number.isNaN(value)) {
-    return "—";
-  }
-
-  const sign = value >= 0 ? "+" : "";
-  return `${sign}${value.toFixed(2)}%`;
-}
-
-function percentClass(value: number | null): string {
-  if (value === null || Number.isNaN(value)) {
-    return "text-zinc-500";
-  }
-
-  if (value >= 0) {
-    return "text-emerald-600 dark:text-emerald-400";
-  }
-
-  return "text-red-600 dark:text-red-400";
-}
 
 function formatUpdatedLabel(iso: string): string {
   return new Date(iso).toLocaleTimeString("en-US", {
@@ -185,7 +135,7 @@ export function CryptoMarketTable({
                   <td className="px-4 py-3 text-right font-medium">
                     <AnimatedPriceCell
                       price={coin.currentPrice}
-                      formatted={formatPrice(coin.currentPrice)}
+                      formatted={formatUsd(coin.currentPrice)}
                     />
                   </td>
                   <td
@@ -194,10 +144,10 @@ export function CryptoMarketTable({
                     {formatPercent(coin.priceChangePercent24h)}
                   </td>
                   <td className="hidden px-4 py-3 text-right tabular-nums text-zinc-700 transition-colors duration-200 group-hover:text-zinc-900 dark:text-zinc-300 dark:group-hover:text-zinc-100 sm:table-cell">
-                    {compactUsdFormatter.format(coin.marketCap)}
+                    {formatCompactUsd(coin.marketCap)}
                   </td>
                   <td className="hidden px-4 py-3 text-right tabular-nums text-zinc-700 transition-colors duration-200 group-hover:text-zinc-900 dark:text-zinc-300 dark:group-hover:text-zinc-100 md:table-cell">
-                    {compactUsdFormatter.format(coin.totalVolume)}
+                    {formatCompactUsd(coin.totalVolume)}
                   </td>
                 </tr>
               ))}
